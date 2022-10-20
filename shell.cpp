@@ -34,7 +34,6 @@ struct History {
 	}
 
 	void execute() {
-		// if last command is assignment, then print variable
 		std::ofstream out("out.cpp");
 		out << join_pre() << start << join_main() << end;
 		out.close();
