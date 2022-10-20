@@ -16,6 +16,7 @@
 ```cpp
 /cpp-shell$ g++ shell.cpp -o shell.exe
 /cpp-shell$ ./shell.exe
+Welcome to the C++ Shell
 
 >>> int a = 10;
 
