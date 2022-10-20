@@ -17,8 +17,8 @@
 #define MAIN_ENTRY 'm'
 
 // main function wrapper to execute
-std::string start = "\nint main() {\n";
-std::string end = "\n}";
+std::string main_start = "\nint main() {\n";
+std::string main_end = "\n}\n";
 
 struct History {
 	std::vector<std::string> pre_lines;
@@ -35,7 +35,7 @@ struct History {
 
 	void execute() {
 		std::ofstream out("out.cpp");
-		out << join_pre() << start << join_main() << end;
+		out << join_pre() << main_start << join_main() << main_end;
 		out.close();
 		system("g++ out.cpp -o out.exe");
 		system("./out.exe");
@@ -79,9 +79,10 @@ struct History {
 
 		std::string with_break = str + '\n';
 
-		if (str[0] == '#') {
+		if (str[0] == '#' || (str.size() > 4 && str.substr(0, 5) == "using")) {
 			pre_lines.push_back(with_break);
 			instructions.push_back(INC_ENTRY);
+			execute();
 			return true;
 		}
 
