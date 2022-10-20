@@ -6,6 +6,7 @@
 - Detecting function declarations
 - Concurrency to compensate for compilation times
 - Smart output addition and removal for REPL loops
+- Error detection and auto-undo
 
 ## Custom commands
 - `refresh`
