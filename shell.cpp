@@ -12,27 +12,31 @@
 
 #define REFRESH "refresh"
 #define EXIT "exit"
+#define UNDO "undo"
+#define INC_ENTRY 'i'
+#define MAIN_ENTRY 'm'
 
 // main function wrapper to execute
 std::string start = "\nint main() {\n";
 std::string end = "\n}";
 
 struct History {
-	std::vector<std::string> includes;
-	std::string history;
+	std::vector<std::string> pre_lines;
+	std::vector<std::string> main_func;
+	std::vector<char> instructions;
 
-	History() {
-		history = "";
+	inline std::string join_main() {
+		return std::accumulate(main_func.begin(), main_func.end(), std::string(""));
 	}
 
-	inline std::string join_includes() {
-		return std::accumulate(includes.begin(), includes.end(), std::string(""));
+	inline std::string join_pre() {
+		return std::accumulate(pre_lines.begin(), pre_lines.end(), std::string(""));
 	}
 
 	void execute() {
 		// if last command is assignment, then print variable
 		std::ofstream out("out.cpp");
-		out << join_includes() << start << history << end;
+		out << join_pre() << start << join_main() << end;
 		out.close();
 		system("g++ out.cpp -o out.exe");
 		system("./out.exe");
@@ -40,30 +44,52 @@ struct History {
 
 	int check_command(std::string str) {
 		if (str == REFRESH) {
-			history = "";
-			includes.clear();
+			main_func.clear();
+			pre_lines.clear();
 			execute();
 			return 1;
 		} else if (str == EXIT) {
 			return 2;
+		} else if (str == UNDO) {
+			if (instructions.empty()) {
+				std::cout << "Nothing to undo" << std::endl;
+				return 1; 
+			}
+
+			char instr = instructions.back();	
+			instructions.pop_back();
+			if (instr == INC_ENTRY) {
+				pre_lines.pop_back();
+				execute();
+			} else if (instr == MAIN_ENTRY) {
+				main_func.pop_back();
+				execute();
+			}
+
+			return 1;
 		}
 		return 0;
 	}
 
 	bool add(std::string str) {
-		if (!str.size()) return true;
+		if (str.empty()) return true;
 		
 		int command = check_command(str);
 		if (command == 1) return true;
 		if (command == 2) return false;
 
+		std::string with_break = str + '\n';
+
 		if (str[0] == '#') {
-			includes.push_back(str);
+			pre_lines.push_back(with_break);
+			instructions.push_back(INC_ENTRY);
 			return true;
 		}
 
-		history += str + "\n";
+		main_func.push_back(with_break);
+		instructions.push_back(MAIN_ENTRY);
 		execute();
+		return true;
 	}
 };
 
