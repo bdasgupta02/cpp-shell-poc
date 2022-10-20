@@ -8,7 +8,7 @@
 // C++ CLI shell without using LLVM/JIT
 // Uses G++
 // Improvements: detect functions (with func caching), concurrency to compensate for compilation speed
-// Custom commands: refresh
+// Custom commands: refresh, undo, exit
 
 #define REFRESH "refresh"
 #define EXIT "exit"
