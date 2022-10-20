@@ -17,8 +17,8 @@
 #define MAIN_ENTRY 'm'
 
 // main function wrapper to execute
-std::string main_start = "\nint main() {\n";
-std::string main_end = "\n}\n";
+const std::string main_start = "\nint main() {\n";
+const std::string main_end = "\n}\n";
 
 struct History {
 	std::vector<std::string> pre_lines;
