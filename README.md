@@ -8,12 +8,12 @@
 - Smart output addition and removal for REPL loops.
 
 ## Custom commands
-- refresh
-- undo
-- exit
+- `refresh`
+- `undo`
+- `exit`
 
 ## Sample usage
-```
+```cpp
 g++ shell.cpp -o shell.exe
 ./shell.exe
 
@@ -24,6 +24,7 @@ g++ shell.cpp -o shell.exe
 >>> #include <iostream>
 
 >>> std::cout << a + b << std::endl;
+30
 
 >>> exit 
 ```
