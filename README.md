@@ -14,8 +14,8 @@
 
 ## Sample usage
 ```cpp
-g++ shell.cpp -o shell.exe
-./shell.exe
+/cpp-shell$ g++ shell.cpp -o shell.exe
+/cpp-shell$ ./shell.exe
 
 >>> int a = 10;
 
