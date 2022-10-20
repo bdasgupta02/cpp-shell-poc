@@ -100,6 +100,7 @@ bool take_input(History &hist) {
 }
 
 int main() {
+	std::cout << "\nWelcome to the C++ Shell" << '\n';
 	History hist;
 	bool is_running = true;
 	while (is_running) is_running = take_input(hist);
