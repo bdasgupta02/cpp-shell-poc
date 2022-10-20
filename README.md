@@ -1,11 +1,11 @@
 # Simple C++ Shell without LLVM/JIT
-- Simulates a REPL under the hood to behave like a shell.
-- Based on G++.
+- Simulates a REPL under the hood to behave like a shell
+- Uses the GNU C++ compiler (G++)
 
 ## Improvements in progress
-- Detecting function declarations.
-- Concurrency to compensate for compilation times.
-- Smart output addition and removal for REPL loops.
+- Detecting function declarations
+- Concurrency to compensate for compilation times
+- Smart output addition and removal for REPL loops
 
 ## Custom commands
 - `refresh`
