@@ -6,9 +6,9 @@
 ## Improvements in progress
 - Detecting function declarations
 - Concurrency to compensate for compilation times (and other optimizations)
-- Smart output addition and removal for REPL loops
 - Error detection and auto-undo
-- Dedicated printer for printing variable assignments, removing old print statements
+- Dedicated REPL printer for printing variable assignments, removing old print statements
+- `help` function
 
 ## Custom commands
 - `refresh`
