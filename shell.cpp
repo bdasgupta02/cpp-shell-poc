@@ -4,6 +4,7 @@
 #include <vector>
 #include <numeric>
 #include <stack>
+#include <cstdio>
 #include <stdlib.h>
 
 // C++ CLI shell without using LLVM/JIT
@@ -52,6 +53,8 @@ struct History {
 			execute();
 			return 1;
 		} else if (str == EXIT) {
+			std::remove("shell_out.cpp");
+			std::remove("shell_out.out");
 			return 2;
 		} else if (str == UNDO) {
 			if (instructions.empty()) {
