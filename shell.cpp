@@ -44,6 +44,10 @@ struct History {
 		out << join_pre() << main_start << join_main() << main_end;
 		out.close();
 		system("g++ shell_out.cpp -o shell_out.out && ./shell_out.out");
+		
+		// make these async
+		std::remove("shell_out.cpp");
+		std::remove("shell_out.out");
 	}
 
 	int check_command(std::string str) {
@@ -53,8 +57,6 @@ struct History {
 			execute();
 			return 1;
 		} else if (str == EXIT) {
-			std::remove("shell_out.cpp");
-			std::remove("shell_out.out");
 			return 2;
 		} else if (str == UNDO) {
 			if (instructions.empty()) {
