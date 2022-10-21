@@ -39,11 +39,10 @@ struct History {
 	}
 
 	void execute() {
-		std::ofstream out("out.cpp");
+		std::ofstream out("shell_out.cpp");
 		out << join_pre() << main_start << join_main() << main_end;
 		out.close();
-		system("g++ out.cpp -o out.exe");
-		system("./out.exe");
+		system("g++ shell_out.cpp -o shell_out.out && ./shell_out.out");
 	}
 
 	int check_command(std::string str) {

@@ -15,8 +15,7 @@
 
 ## Sample usage
 ```cpp
-/cpp-shell$ g++ shell.cpp -o shell.exe
-/cpp-shell$ ./shell.exe
+/cpp-shell$ g++ shell.cpp -o shell.out && ./shell.out
 
 Welcome to the C++ Shell
 
