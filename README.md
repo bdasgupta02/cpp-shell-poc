@@ -4,7 +4,7 @@
 
 ## Improvements in progress
 - Detecting function declarations
-- Concurrency to compensate for compilation times
+- Concurrency to compensate for compilation times (and other optimizations)
 - Smart output addition and removal for REPL loops
 - Error detection and auto-undo
 
