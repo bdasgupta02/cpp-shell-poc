@@ -14,8 +14,17 @@
 #define MAIN_ENTRY 'm'
 
 // main function wrapper to execute
-const std::string main_start = "\nint main() {\n";
-const std::string main_end = "\n}\n";
+static const std::string main_start = "\nint main() {\n";
+static const std::string main_end = "\n}\n";
+
+// platform specific
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+static const std::string slash="\\";
+#else
+static const std::string slash="/";
+#endif
+
+static const std::string exec_command = "g++ shell_out.cpp -o shell_out.out && ." + slash + "shell_out.out";
 
 struct History {
 	std::vector<std::string> pre_lines;
@@ -38,11 +47,7 @@ struct History {
 		std::ofstream out("shell_out.cpp");
 		out << join_pre() << main_start << join_main() << main_end;
 		out.close();
-		system("g++ shell_out.cpp -o shell_out.out && ./shell_out.out");
-		
-		// make these async
-		std::remove("shell_out.cpp");
-		std::remove("shell_out.out");
+		system(exec_command.c_str());
 	}
 
 	int check_command(std::string str) {
@@ -52,6 +57,8 @@ struct History {
 			execute();
 			return 1;
 		} else if (str == EXIT) {
+			std::remove("shell_out.cpp");
+			std::remove("shell_out.out");
 			return 2;
 		} else if (str == UNDO) {
 			if (instructions.empty()) {
