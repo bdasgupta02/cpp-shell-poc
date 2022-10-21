@@ -20,13 +20,13 @@
 
 Welcome to the C++ Shell
 
->>> int a = 10;
+>>> int a = 10
 
->>> int b = 20;
+>>> int b = 20
 
 >>> #include <iostream>
 
->>> std::cout << a + b << std::endl;
+>>> std::cout << a + b << std::endl
 30
 
 >>> exit 
