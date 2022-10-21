@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <numeric>
+#include <stack>
 #include <stdlib.h>
 
 // C++ CLI shell without using LLVM/JIT
@@ -23,7 +24,7 @@ const std::string main_end = "\n}\n";
 struct History {
 	std::vector<std::string> pre_lines;
 	std::vector<std::string> main_func;
-	std::vector<char> instructions;
+	std::stack<char> instructions;
 
 	inline std::string join_main() {
 		return std::accumulate(main_func.begin(), main_func.end(), std::string(""));
@@ -55,8 +56,8 @@ struct History {
 				return 1; 
 			}
 
-			char instr = instructions.back();	
-			instructions.pop_back();
+			char instr = instructions.top();	
+			instructions.pop();
 			if (instr == INC_ENTRY) {
 				pre_lines.pop_back();
 				execute();
@@ -81,13 +82,13 @@ struct History {
 
 		if (str[0] == '#' || (str.size() > 4 && str.substr(0, 5) == "using")) {
 			pre_lines.push_back(with_break);
-			instructions.push_back(INC_ENTRY);
+			instructions.push(INC_ENTRY);
 			execute();
 			return true;
 		}
 
 		main_func.push_back(with_break);
-		instructions.push_back(MAIN_ENTRY);
+		instructions.push(MAIN_ENTRY);
 		execute();
 		return true;
 	}
