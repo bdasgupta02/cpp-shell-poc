@@ -34,6 +34,10 @@ struct History {
 		return std::accumulate(pre_lines.begin(), pre_lines.end(), std::string(""));
 	}
 
+	inline std::string semi_check(std::string str) {
+		return str[str.size() - 1] == ';' ? str : str + ';';
+	}
+
 	void execute() {
 		std::ofstream out("out.cpp");
 		out << join_pre() << main_start << join_main() << main_end;
@@ -78,16 +82,23 @@ struct History {
 		if (command == 1) return true;
 		if (command == 2) return false;
 
-		std::string with_break = str + '\n';
-
-		if (str[0] == '#' || (str.size() > 4 && str.substr(0, 5) == "using")) {
-			pre_lines.push_back(with_break);
+		if (str[0] == '#') {
+			pre_lines.push_back(str + '\n');
 			instructions.push(INC_ENTRY);
 			execute();
 			return true;
 		}
 
-		main_func.push_back(with_break);
+		std::string pre_processed = semi_check(str) + '\n';
+
+		if (str.size() > 4 && str.substr(0, 5) == "using") {
+			pre_lines.push_back(pre_processed);
+			instructions.push(INC_ENTRY);
+			execute();
+			return true;
+		}
+		
+		main_func.push_back(pre_processed);
 		instructions.push(MAIN_ENTRY);
 		execute();
 		return true;
