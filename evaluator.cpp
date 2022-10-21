@@ -1,4 +1,4 @@
-#include "history.hpp"
+#include "evaluator.hpp"
 #include <string>
 #include <fstream>
 #include <vector>
@@ -25,22 +25,22 @@ static const std::string slash = "/";
 
 static const std::string exec_command = "g++ shell_out.cpp -o shell_out.out && ." + slash + "shell_out.out";
 
-inline std::string History::join_main()
+inline std::string Evaluator::join_main()
 {
   return std::accumulate(main_func.begin(), main_func.end(), std::string(""));
 }
 
-inline std::string History::join_pre()
+inline std::string Evaluator::join_pre()
 {
   return std::accumulate(pre_lines.begin(), pre_lines.end(), std::string(""));
 }
 
-inline std::string History::semi_check(std::string str)
+inline std::string Evaluator::semi_check(std::string str)
 {
   return str[str.size() - 1] == ';' ? str : str + ';';
 }
 
-void History::execute()
+void Evaluator::execute()
 {
   std::ofstream out("shell_out.cpp");
   out << join_pre() << main_start << join_main() << main_end;
@@ -48,7 +48,7 @@ void History::execute()
   system(exec_command.c_str());
 }
 
-int History::check_command(std::string str)
+int Evaluator::check_command(std::string str)
 {
   if (str == refresh)
   {
@@ -89,7 +89,7 @@ int History::check_command(std::string str)
   return 0;
 }
 
-bool History::add(std::string str)
+bool Evaluator::add(std::string str)
 {
   if (str.empty())
     return true;

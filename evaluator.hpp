@@ -1,10 +1,10 @@
-#ifndef ShellHistory_H
-#define ShellHistory_H
+#ifndef ShellEvaluator_H
+#define ShellEvaluator_H
 #include <vector>
 #include <stack>
 #include <string>
 
-struct History
+struct Evaluator
 {
   std::vector<std::string> pre_lines;
   std::vector<std::string> main_func;

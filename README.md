@@ -1,4 +1,5 @@
-# Simple C++ Shell without LLVM/JIT
+# Simple C++ Shell without JIT
+- Just uses C++ STL
 - Simulates a REPL under the hood to behave like a shell
 - Uses the GNU C++ compiler (G++)
 
@@ -7,6 +8,7 @@
 - Concurrency to compensate for compilation times (and other optimizations)
 - Smart output addition and removal for REPL loops
 - Error detection and auto-undo
+- Dedicated printer for printing variable assignments, removing old print statements
 
 ## Custom commands
 - `refresh`

@@ -2,5 +2,6 @@
 *.out
 
 /shell_out.cpp
+/todo.txt
 
 .vscode
