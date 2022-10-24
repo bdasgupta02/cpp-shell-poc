@@ -9,9 +9,9 @@
 #include <cstdio>
 #include <stdlib.h>
 
-static const std::string refresh = "refresh";
-static const std::string exit_msg = "exit";
-static const std::string undo = "undo";
+static const std::string refresh = "/refresh";
+static const std::string exit_msg = "/exit";
+static const std::string undo = "/undo";
 static const char pre_entry = 'p';
 static const char main_entry = 'm';
 

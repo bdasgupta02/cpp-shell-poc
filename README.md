@@ -7,24 +7,28 @@
 - Tool to explore and prototype C++ code quickly
 - Helpful in learning C++ through quick evaluation and feedback
 - Not many options available that use pure C++
-- Aims to be geared specifically towards quick testing (more accurate print interpretation) than other options
-- This seemed fun
+- Seemed like a really fun challenge to do it without JIT
 
 ## Improvements in progress
 - Detecting function declarations
 - Concurrency to compensate for compilation times (and other optimizations)
 - Error detection and auto-undo
 - Dedicated REPL printer for printing variable assignments, removing old print statements
-- `help` function
+- `/help` function
 
-## Custom commands
-- `refresh`
-- `undo`
-- `exit`
+## Key improvements
+- Threading compilation for better responsiveness
+- Ability to retain the source output file
+
+## Custom commands (prefixed with /)
+- `/refresh`
+- `/undo`
+- `/exit`
 
 ## Sample usage
+Just run the `shell.cpp` file
 ```cpp
-/cpp-shell$ g++ shell.cpp -o shell.out && ./shell.out
+cpp-shell$ g++ shell.cpp -o shell.out && ./shell.out
 
 Welcome to the C++ Shell
 
