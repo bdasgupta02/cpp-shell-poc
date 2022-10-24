@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
 #include "evaluator.cpp"
 
 bool take_input(Evaluator &eval)
@@ -11,7 +13,7 @@ bool take_input(Evaluator &eval)
 
 void run_shell()
 {
-	std::string prompt = "\ncppsh> ";
+	std::string prompt = "\n>>> ";
 	Evaluator eval;
 	bool is_running = true;
 	while (is_running)
@@ -21,9 +23,25 @@ void run_shell()
 	}
 }
 
+int load()
+{
+    std::cout << '-' << std::flush;
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "\b\\" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "\b|" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "\b/" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "\b-" << std::flush;
+    }
+}
+
 int main()
 {
 	std::cout << "\nWelcome to the C++ Shell\n";
+	//load();
 	run_shell();
 	return 0;
 }

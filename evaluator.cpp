@@ -5,6 +5,7 @@
 #include <numeric>
 #include <iostream>
 #include <stack>
+#include <thread>
 #include <cstdio>
 #include <stdlib.h>
 
@@ -24,6 +25,11 @@ static const std::string slash = "/";
 #endif
 
 static const std::string exec_command = "g++ shell_out.cpp -o shell_out.out && ." + slash + "shell_out.out";
+
+inline bool check_print(std::string inp)
+{
+  return inp.find("cout") != std::string::npos || inp.find("print") != std::string::npos;
+}
 
 inline std::string Evaluator::join_main()
 {
@@ -54,7 +60,7 @@ int Evaluator::check_command(std::string str)
   {
     main_func.clear();
     pre_lines.clear();
-    execute();
+    std::thread(&execute, this).detach();
     return 1;
   }
   else if (str == exit_msg)
@@ -76,13 +82,15 @@ int Evaluator::check_command(std::string str)
     if (instr == pre_entry)
     {
       pre_lines.pop_back();
-      execute();
     }
     else if (instr == main_entry)
     {
       main_func.pop_back();
-      execute();
     }
+
+    std::thread execT([this]
+                      { execute(); });
+    execT.detach();
 
     return 1;
   }
@@ -104,7 +112,9 @@ bool Evaluator::add(std::string str)
   {
     pre_lines.push_back(str + '\n');
     instructions.push(pre_entry);
-    execute();
+    std::thread execT([this]
+                      { execute(); });
+    execT.detach();
     return true;
   }
 
@@ -114,12 +124,27 @@ bool Evaluator::add(std::string str)
   {
     pre_lines.push_back(pre_processed);
     instructions.push(pre_entry);
-    execute();
+    std::thread execT([this]
+                      { execute(); });
+    execT.detach();
     return true;
   }
 
+  if (check_print(pre_processed))
+  {
+    main_func.push_back(pre_processed);
+    instructions.push(main_entry);
+    execute();
+    // pop here after printing, new thread
+    return true;
+  }
+
+  // check for assignment/mention
+
   main_func.push_back(pre_processed);
   instructions.push(main_entry);
-  execute();
+  std::thread execT([this]
+                    { execute(); });
+  execT.detach();
   return true;
 }

@@ -1,7 +1,14 @@
-# Simple C++ Shell without JIT
-- Just uses C++ STL
-- Simulates a REPL under the hood to behave like a shell
+# Simple C++ Shell without JIT compilation
+- Just uses C++ STL (as opposed to cling)
+- Simulates a REPL under the hood to behave like an interactive shell
 - Uses the GNU C++ compiler (G++)
+
+## Why?
+- Tool to explore and prototype C++ code quickly
+- Helpful in learning C++ through quick evaluation and feedback
+- Not many options available that use pure C++
+- Aims to be geared specifically towards quick testing (more accurate print interpretation) than other options
+- This seemed fun
 
 ## Improvements in progress
 - Detecting function declarations
