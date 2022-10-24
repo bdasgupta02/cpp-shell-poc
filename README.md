@@ -28,7 +28,7 @@
 - `/exit`
 
 ## Sample usage
-Just run the `shell.cpp` file
+Just compile and run the `shell.cpp` file
 ```cpp
 cpp-shell$ g++ shell.cpp -o shell.out && ./shell.out
 
