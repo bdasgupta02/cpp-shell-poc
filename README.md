@@ -14,7 +14,9 @@
 - Concurrency to compensate for compilation times (and other optimizations)
 - Error detection and auto-undo
 - Dedicated REPL printer for printing variable assignments, removing old print statements
-- `/help` function
+- `/help` command to seek help
+- `/func` command to define functions
+- `/loop` command to start loops
 
 ## Key improvements
 - Threading compilation for better responsiveness
