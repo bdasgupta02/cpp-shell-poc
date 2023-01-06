@@ -1,4 +1,5 @@
 # Simple C++ Shell without JIT compilation
+## [In-progress]
 - Just uses C++ STL (as opposed to cling)
 - Simulates a REPL under the hood to behave like an interactive shell
 - Uses the GNU C++ compiler (G++)
@@ -13,6 +14,7 @@
 - Detecting function declarations
 - Concurrency to compensate for compilation times (and other optimizations)
 - Error detection and auto-undo
+- Dedicated interpreter
 - Dedicated REPL printer for printing variable assignments, removing old print statements
 - `/help` command to seek help
 - `/func` command to define functions
